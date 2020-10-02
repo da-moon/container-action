@@ -1,0 +1,16 @@
+name: "container action"
+description: "some action"
+author: "da-moon"
+
+
+inputs:
+  myInput:
+    description: "sominput"
+    required: true
+    default: "default input"
+outputs:
+  myOutput:
+    description: "some output"
+runs:
+  using: "docker"
+  image: "Dockerfile"
