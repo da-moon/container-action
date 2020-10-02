@@ -17,8 +17,7 @@ jobs:
           - node: 13
             os: ubuntu-18.04
             experimental: true
-    
-  steps:
+    steps:
       - uses: actions/checkout@v2
       - name: "use node '${{ matrix.node }}'"
         uses: actions/setup-node@v1
