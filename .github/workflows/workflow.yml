@@ -1,9 +1,29 @@
+name: "some name"
+#on:
+#  push:
+#    path:
+#      - '**.go'
 on: [push]
 jobs:
   my-job:
     runs-on: ubuntu-latest
-    steps:
+    strategy:
+      fail-fast: true 
+      matrix: 
+        node: [11, 12]
+        os: [macos-latest, ubuntu-18.04]
+        experimental: [false]
+        include:
+          - node: 13
+            os: ubuntu-18.04
+            experimental: true
+    
+  steps:
       - uses: actions/checkout@v2
+      - name: "use node '${{ matrix.node }}'"
+        uses: actions/setup-node@v1
+        with:
+          node-version: ${{ matrix.node }}
       - name: run action
         id: hello
         uses: ./
@@ -13,3 +33,10 @@ jobs:
         run: |
           echo ${{ steps.hello.outputs.memory }}
           echo "done"
+      - run: mkdir -p path/to/artifact
+      - run: echo hello > path/to/artifact/world.txt
+      - uses: actions/upload-artifact@v2
+        with:
+          name: my-artifact
+          path: path/to/artifact/world.txt
+
