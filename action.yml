@@ -8,6 +8,10 @@ inputs:
     description: "sominput"
     required: true
     default: "default input"
+ git_repository_owner:
+    description: "repository owner"
+    required: true
+    default: "da-moon"
 outputs:
   myOutput:
     description: "some output"
